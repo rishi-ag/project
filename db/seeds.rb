@@ -47,10 +47,17 @@ invoices = []
     invoice = Invoice.create(
       total_amount: rand(500_000..1_000_000),
       created_at: created_date.to_time.to_i,
-      is_goods_delivered: false,
-      goods_delivered_due_at: (created_date + payment_days).to_time.to_i
+      operator_id: operator.id,
+      client_id: client.id
     )
     invoices << invoice
+    StatusInvoice.create(
+      is_goods_delivered: true,
+      goods_delivered_at: (created_date + 7).to_time.to_i,
+      is_invoice_paid: true,
+      invoice_paid_at: (created_date + 7 + payment_days).to_time.to_i,
+      invoice_id: invoice.id
+    )
   end
 end
 

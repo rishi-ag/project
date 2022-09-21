@@ -27,11 +27,16 @@ class InitWorld < ActiveRecord::Migration[7.0]
     create_table :invoices do |t|
       t.float :total_amount
       t.timestamp :created_at
-      t.timestamp :goods_delivered_at
-      t.timestamp :goods_delivered_due_at
-      t.boolean :is_goods_delivered
       t.references :client, foreign_key: true
       t.references :operator, foreign_key: true
+    end
+
+    create_table :status_invoices do |t|
+      t.boolean :is_goods_delivered
+      t.timestamp :goods_delivered_at
+      t.boolean :is_invoice_paid
+      t.timestamp :invoice_paid_at
+      t.references :invoice, foreign_key: true
     end
 
     create_table :operators do |t|

@@ -19,12 +19,11 @@ after do
 end
 
 get '/' do
-  # TODO
-  # 1. fetch investors from database
-  # 2. store investors in an instance variable
-  # 3. Use it in the `app/views/investor.erb` view
   @investors = Investor.all
   erb :investors
 end
 
-# TODO: add more routes to your app!
+get '/investor/:id' do
+  @investor = Investor.find(params[:id])
+  erb :investor
+end

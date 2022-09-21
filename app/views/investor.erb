@@ -1,0 +1,32 @@
+<h1>Investor</h1>
+<ul>
+  <li>Name: <%=@investor.name %></li>
+  <li>Email: <%=@investor.email %></li>
+  <li>Total amount deposited: <%=@investor.amount_deposited%></li>
+  <li>Total amount deployed: <%=@investor.amount_deployed%></li>
+  <li>Amount remaining: <%=@investor.amount_deposited - @investor.amount_deployed%></li>
+</ul>
+
+
+<% @investor.financed_invoices.each do |financed_invoice| %>
+  <ul>
+   <li><%= financed_invoice.deployed_amount%>, <%= @investor.investor_contracts[0].annualised_interest%></li>
+   <br>
+  </ul>
+<% end %>
+
+<% @investor.financed_invoices.each do |financed_invoice| %>
+  <ul>
+   <li><%= financed_invoice.deployed_amount%>, <%= @investor.investor_contracts[0].annualised_interest%></li>
+   <br>
+  </ul>
+<% end %>
+
+
+<h3>Invoices Information</h3>
+<% @investor.invoices.each do |invoice| %>
+  <ul>
+   <li><%= invoice.goods_delivered_due_at%></li>
+   <br>
+  </ul>
+<% end %>

@@ -3,7 +3,7 @@
 
 <% @investors.each do |investor| %>
   <li>
-   <a href="/investor/<%=investor.id%>"><%= investor.name %></a>
+   <a href="/investor/<%= investor.id %>"><%= investor.name %></a>
+   <br>
   </li>
 <% end %>
-# TODO: list posts here. You can use instance variables set in the controller (app.rb)

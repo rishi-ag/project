@@ -52,9 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_081753) do
   create_table "invoices", force: :cascade do |t|
     t.float "total_amount"
     t.datetime "created_at", precision: nil
-    t.datetime "goods_delivered_at", precision: nil
-    t.datetime "goods_delivered_due_at", precision: nil
-    t.boolean "is_goods_delivered"
     t.integer "client_id"
     t.integer "operator_id"
     t.index ["client_id"], name: "index_invoices_on_client_id"
@@ -76,6 +73,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_081753) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "status_invoices", force: :cascade do |t|
+    t.boolean "is_goods_delivered"
+    t.datetime "goods_delivered_at", precision: nil
+    t.boolean "is_invoice_paid"
+    t.datetime "invoice_paid_at", precision: nil
+    t.integer "invoice_id"
+    t.index ["invoice_id"], name: "index_status_invoices_on_invoice_id"
+  end
+
   add_foreign_key "clients", "operators"
   add_foreign_key "financed_invoices", "investors"
   add_foreign_key "financed_invoices", "invoices"
@@ -84,4 +90,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_081753) do
   add_foreign_key "invoices", "operators"
   add_foreign_key "operator_client_contracts", "clients"
   add_foreign_key "operator_client_contracts", "operators"
+  add_foreign_key "status_invoices", "invoices"
 end
